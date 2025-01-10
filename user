@@ -1,0 +1,6 @@
+type User struct {
+	id        String
+	FirstName String
+	LastName  String
+	Admin     bool
+}
