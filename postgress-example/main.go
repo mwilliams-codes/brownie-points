@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("Successfully connected to the database!")
 
 	// Run a SELECT query
-	query := `SELECT id, username FROM "User";`
+	query := `SELECT id, username, password FROM "User";`
 	rows, err := db.Query(query) // Example parameter: `active = true`
 	if err != nil {
 		log.Fatalf("Failed to execute query: %v", err)
@@ -50,10 +50,11 @@ func main() {
 	for rows.Next() {
 		var id string
 		var username string
-		if err := rows.Scan(&id, &username); err != nil {
+		var password string
+		if err := rows.Scan(&id, &username, &password); err != nil {
 			log.Fatalf("Failed to scan row: %v", err)
 		}
-		fmt.Printf("ID: %s, User Name: %s\n", id, username)
+		fmt.Printf("ID: %s, User Name: %s, Password: %s\n", id, username, password)
 	}
 
 	// Check for errors after iterating
